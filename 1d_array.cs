@@ -1,8 +1,10 @@
 using System;
 sealed class D1_arrays : Base_array{
     private int[] a;
+    private string type;
     
-    public D1_arrays(bool flag) {
+    public D1_arrays(bool flag, string Type) {
+        type = Type;
         Create_array(flag);
     }
 
