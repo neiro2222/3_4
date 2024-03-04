@@ -1,6 +1,6 @@
 using System;
-sealed class D2_arrays : Base_array{
-    private int[,] array;
+sealed class D2_arrays<T> : Base_array{
+    private T[,] array;
     public D2_arrays(bool flag) {
         Create_array(flag);
     }
@@ -8,39 +8,66 @@ sealed class D2_arrays : Base_array{
         Console.WriteLine("Введите размеры двумерного массива : ");
         int n = int.Parse(Console.ReadLine());
         int m = int.Parse(Console.ReadLine());
-        array = new int[n, m];
-        if (flag) 
-        {
-            _Key_init();
-        } else {
-            _Random_init();
+        array = new T[n, m];
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                array[i, j] = GenerateValue(flag);
+            }
         }
     }
     
+    public T GenerateValue(bool flag)
+    {
+        dynamic value;
+
+        if (typeof(T) == typeof(int))
+        {
+            int_input val = new int_input();
+            if (flag) {
+                val.Generate_Random();
+            } else {
+                val.Generate_Key();
+            }
+            value = val;
+        }
+        else if (typeof(T) == typeof(double))
+        {
+            double_input val = new double_input();
+            if (flag) {
+                val.Generate_Random();
+            } else {
+                val.Generate_Key();
+            }
+            value = val;
+        }
+        else if (typeof(T) == typeof(bool))
+        {
+            bool_input val = new bool_input();
+            if (flag) {
+                val.Generate_Random();
+            } else {
+                val.Generate_Key();
+            }
+            value = val;
+        }
+        else
+        {
+            string_input val = new string_input();
+            if (flag) {
+                val.Generate_Random();
+            } else {
+                val.Generate_Key();
+            }
+            value = val;
+        }
+
+        return value;
+    }
     public override void Change(bool flag) {
         Console.WriteLine("Массив изменен");
         Create_array(flag);
     }
 
-    protected override void _Key_init()
-    {
-        Console.WriteLine("Введите элементы массива :");
-        for (int i = 0; i < array.GetLength(0); i++) {
-            for (int j = 0; j < array.GetLength(1); j++) {
-                array[i, j] = int.Parse(Console.ReadLine());
-            }
-        }
-    }
-
-    protected override void _Random_init() {
-        Console.WriteLine("Массив вводится случайно");
-        Random rnd = new Random();
-        for (int i = 0; i < array.GetLength(0); i++) {
-            for (int j = 0; j < array.GetLength(1); j++) {
-                array[i, j] = rnd.Next(200);
-            }
-        }
-    }
 
     public override void Print() {
         Console.WriteLine("Двумерный массив");
