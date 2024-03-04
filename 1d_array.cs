@@ -1,42 +1,26 @@
 using System;
-sealed class D1_arrays : Base_array{
-    private int[] a;
-    private string type;
+sealed class D1_arrays<T> : Base_array{
+    private T[] a;
     
-    public D1_arrays(bool flag, string Type) {
-        type = Type;
+    public D1_arrays(bool flag) {
         Create_array(flag);
     }
 
     public override void Create_array(bool flag) {
         Console.WriteLine("Введите размер массива : ");
         int n = int.Parse(Console.ReadLine());
-        a = new int[n];
+        a = new T[n];
+        INPUT_1d<T> array = new INPUT_1d<T>(n);
         if (flag) {
-            _Key_init();
+            array.Generate_Random();
         } else {
-            _Random_init();
+            array.Generate_Key();
         }
-    }
-    
+        a = array.GET();
+    }    
     public override void Change(bool flag) {
         Console.WriteLine("Массив изменен");
         Create_array(flag);
-    }
-    
-    protected override void _Key_init() {
-        Console.WriteLine("Введите элементы массива :");
-        for (int i = 0; i < a.Length; i++) {
-            a[i] = int.Parse(Console.ReadLine());
-        }
-    }
-
-    protected override void _Random_init() {
-        Console.WriteLine("Массив вводится случайно");
-        Random rnd = new Random();
-        for (int i = 0; i < a.Length; i++) {
-            a[i] = rnd.Next(200);
-        }
     }
     
     public override void Print() {
