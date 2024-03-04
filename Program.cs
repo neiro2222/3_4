@@ -9,7 +9,7 @@ class HelloWorld {
 
     bool flag = bool.Parse(Console.ReadLine());
     
-    base_Array[0] = new D1_arrays(flag, "string");     
+    base_Array[0] = new D1_arrays<int>(flag);     
     base_Array[1] = new D2_arrays(flag);
   
 
