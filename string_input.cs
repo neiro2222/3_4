@@ -1,5 +1,6 @@
 using System;
-sealed class string_input{
+sealed class string_input : elemenent_gen<string>
+{
     private Random random = new Random();
 
     public string Generate_Random() {

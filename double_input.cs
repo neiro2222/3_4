@@ -1,5 +1,6 @@
 using System;
-sealed class double_input{
+sealed class double_input : elemenent_gen<double>
+{
     private Random random = new Random();
 
     public double Generate_Random() {

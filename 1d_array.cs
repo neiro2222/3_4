@@ -1,8 +1,9 @@
 using System;
 sealed class D1_arrays<T> : Base_array{
     private T[] a;
-    
-    public D1_arrays(bool flag) {
+    private elemenent_gen<T> _element_gen;
+    public D1_arrays(bool flag, elemenent_gen<T> Element_gen) {
+        _element_gen = Element_gen;
         Create_array(flag);
     }
 
@@ -11,57 +12,61 @@ sealed class D1_arrays<T> : Base_array{
         int n = int.Parse(Console.ReadLine());
         a = new T[n];
         for (int i = 0; i < n; i++) {
-            a[i] = GenerateValue(flag);
+            if (flag) {
+                a[i] = _element_gen.Generate_Random();
+            } else {
+                a[i] = _element_gen.Generate_Key();
+            }
         }
     }    
 
-    public T GenerateValue(bool flag)
-    {
-        dynamic value;
+    // public T GenerateValue(bool flag)
+    // {
+    //     dynamic value;
 
-        if (typeof(T) == typeof(int))
-        {
-            int_input val = new int_input();
-            if (flag) {
-                val.Generate_Random();
-            } else {
-                val.Generate_Key();
-            }
-            value = val;
-        }
-        else if (typeof(T) == typeof(double))
-        {
-            double_input val = new double_input();
-            if (flag) {
-                val.Generate_Random();
-            } else {
-                val.Generate_Key();
-            }
-            value = val;
-        }
-        else if (typeof(T) == typeof(bool))
-        {
-            bool_input val = new bool_input();
-            if (flag) {
-                val.Generate_Random();
-            } else {
-                val.Generate_Key();
-            }
-            value = val;
-        }
-        else
-        {
-            string_input val = new string_input();
-            if (flag) {
-                val.Generate_Random();
-            } else {
-                val.Generate_Key();
-            }
-            value = val;
-        }
+    //     if (typeof(T) == typeof(int))
+    //     {
+    //         int_input val = new int_input();
+    //         if (flag) {
+    //             val.Generate_Random();
+    //         } else {
+    //             val.Generate_Key();
+    //         }
+    //         value = val;
+    //     }
+    //     else if (typeof(T) == typeof(double))
+    //     {
+    //         double_input val = new double_input();
+    //         if (flag) {
+    //             val.Generate_Random();
+    //         } else {
+    //             val.Generate_Key();
+    //         }
+    //         value = val;
+    //     }
+    //     else if (typeof(T) == typeof(bool))
+    //     {
+    //         bool_input val = new bool_input();
+    //         if (flag) {
+    //             val.Generate_Random();
+    //         } else {
+    //             val.Generate_Key();
+    //         }
+    //         value = val;
+    //     }
+    //     else
+    //     {
+    //         string_input val = new string_input();
+    //         if (flag) {
+    //             val.Generate_Random();
+    //         } else {
+    //             val.Generate_Key();
+    //         }
+    //         value = val;
+    //     }
 
-        return value;
-    }
+    //     return value;
+    // }
 
     public override void Change(bool flag) {
         Console.WriteLine("Массив изменен");

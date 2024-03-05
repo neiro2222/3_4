@@ -1,5 +1,6 @@
 using System;
-sealed class bool_input{
+sealed class bool_input : elemenent_gen<bool>
+{
     private Random random = new Random();
 
     public bool Generate_Random() {

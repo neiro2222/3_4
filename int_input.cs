@@ -1,5 +1,6 @@
 using System;
-sealed class int_input{
+sealed class int_input : elemenent_gen<int>
+{
     private Random random = new Random();
 
     public int Generate_Random() {
